@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}ResumeAI - Smart ATS Analyzer{% endblock %}
+
+{% block content %}
+<header class="hero-gradient text-center">
+    <div class="container">
+        <h1 class="display-3 fw-bold mb-4">Master Your Career with <span class="text-primary-custom">ResumeAI</span></h1>
+        <p class="lead text-muted mb-5">Get instant ATS-compatible feedback, skill gap analysis, and expert recommendations to land your dream job faster.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg px-4">Get Started Free</a>
+            <a href="#how-it-works" class="btn btn-outline-secondary btn-lg px-4">How it Works</a>
+        </div>
+    </div>
+</header>
+
+<section id="features" class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card card-saas p-4 h-100">
+                    <div class="stat-icon bg-primary-soft text-primary-custom mb-3"><i class="bi bi-cpu"></i></div>
+                    <h5 class="fw-bold">AI ATS Scoring</h5>
+                    <p class="text-muted small">Instant compatibility scoring based on real-world Applicant Tracking System algorithms.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-saas p-4 h-100">
+                    <div class="stat-icon bg-primary-soft text-primary-custom mb-3"><i class="bi bi-briefcase"></i></div>
+                    <h5 class="fw-bold">Job Matching</h5>
+                    <p class="text-muted small">Compare your resume against specific job descriptions to uncover keyword gaps.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-saas p-4 h-100">
+                    <div class="stat-icon bg-primary-soft text-primary-custom mb-3"><i class="bi bi-graph-up-arrow"></i></div>
+                    <h5 class="fw-bold">Insightful Dashboard</h5>
+                    <p class="text-muted small">Visualize your skill distribution and track your improvement over time.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "dashboard_base.html" %}
+
+{% block dash_title %}Job Matcher{% endblock %}
+
+{% block dashboard_content %}
+<div class="row">
+    <div class="col-12 mb-4">
+        <h2 class="fw-bold mb-1">Job Description Matcher</h2>
+        <p class="text-muted small">Compare your resume against any target job posting to get a keyword gap analysis.</p>
+    </div>
+
+    <div class="col-lg-6 mb-4">
+        <div class="card card-saas p-4">
+            <h5 class="fw-bold mb-3">1. Select Resume &amp; Paste Job</h5>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Select Your Resume</label>
+                    <select name="resume_id" class="form-select" required>
+                        <option value="">-- Choose a resume --</option>
+                        {% for resume in resumes %}
+                        <option value="{{ resume.id }}">{{ resume.file.name|cut:"resumes/" }} ({{ resume.uploaded_at|date:"M d" }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Paste Job Description</label>
+                    <textarea name="job_description" class="form-control" rows="8" placeholder="Paste the full job requirements, skills, and qualifications here..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 py-2">Analyze Match</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-lg-6 mb-4">
+        <div class="card card-saas p-4 h-100">
+            <h5 class="fw-bold mb-3">2. Match Analysis</h5>
+            {% if match_score %}
+            <div class="text-center py-4">
+                <div class="score-circle mb-3" style="--score: {{ match_score }}">
+                    <div class="score-circle-inner">
+                        <span>{{ match_score }}%</span>
+                    </div>
+                </div>
+                <h5 class="fw-bold">Match Compatibility Score</h5>
+                <p class="text-muted small">Resume evaluated against key job responsibilities.</p>
+            </div>
+            {% else %}
+            <div class="text-center py-5 text-muted">
+                <i class="bi bi-file-earmark-diff display-4 d-block mb-3 text-secondary"></i>
+                <p>Select a resume and paste a job description on the left to see your match score and keyword gaps.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

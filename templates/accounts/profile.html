@@ -1,0 +1,37 @@
+{% extends "dashboard_base.html" %}
+
+{% block dash_title %}My Profile{% endblock %}
+
+{% block dashboard_content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <h2 class="fw-bold mb-4">User Profile &amp; Preferences</h2>
+        <div class="card card-saas p-4">
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label text-muted small">Username</label>
+                    <input type="text" class="form-control" value="{{ user.username }}" disabled>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted small">Email</label>
+                    <input type="email" class="form-control" value="{{ user.email }}" disabled>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Phone Number</label>
+                    {{ profile_form.phone_number }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Target Job Title</label>
+                    {{ profile_form.target_job_title }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Years of Experience</label>
+                    {{ profile_form.years_of_experience }}
+                </div>
+                <button type="submit" class="btn btn-primary px-4">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

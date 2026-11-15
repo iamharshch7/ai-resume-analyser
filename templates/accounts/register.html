@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Create Account - ResumeAI{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card card-saas p-4">
+                <div class="text-center mb-4">
+                    <span class="brand-icon mx-auto mb-2"><i class="bi bi-person-plus"></i></span>
+                    <h3 class="fw-bold">Create Free Account</h3>
+                    <p class="text-muted small">Analyze resumes, match jobs, and boost your hiring score.</p>
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        {{ form.username }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email Address</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        {{ form.password }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Confirm Password</label>
+                        {{ form.confirm_password }}
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 py-2 mt-2">Create Account</button>
+                </form>
+                <div class="text-center mt-4">
+                    <span class="text-muted small">Already have an account? </span>
+                    <a href="{% url 'accounts:login' %}" class="small text-primary-custom fw-semibold">Sign in</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends "dashboard_base.html" %}
+{% load static %}
+{% load analyzer_extras %}
+
+{% block dash_title %}Analysis Results{% endblock %}
+
+{% block dashboard_content %}
+<div class="row">
+    <div class="col-12 mb-4 d-flex justify-content-between align-items-center">
+        <h2 class="fw-bold m-0">AI Analysis Report</h2>
+        <div>
+            <a href="{% url 'resumes:upload' %}" class="btn btn-outline-primary btn-sm me-2">New Analysis</a>
+            <button class="btn btn-primary btn-sm" onclick="window.print()"><i class="bi bi-printer me-1"></i> Print Report</button>
+        </div>
+    </div>
+
+    <!-- Score Overview -->
+    <div class="col-lg-4 mb-4">
+        <div class="card card-saas p-4 text-center h-100">
+            <h5 class="fw-bold mb-4">Overall Score</h5>
+            <div class="score-circle mb-3" style="--score: {{ analysis.overall_score }}">
+                <div class="score-circle-inner">
+                    <span>{{ analysis.overall_score }}</span>
+                    <span class="text-muted small fw-normal">/ 100</span>
+                </div>
+            </div>
+            <p class="mt-3 fw-semibold">
+                {% if analysis.overall_score >= 80 %}
+                <span class="text-success">Excellent Profile!</span>
+                {% elif analysis.overall_score >= 60 %}
+                <span class="text-warning">Good Potential</span>
+                {% else %}
+                <span class="text-danger">Needs Improvement</span>
+                {% endif %}
+            </p>
+            <div class="mt-4 border-top pt-3 text-start">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted small">ATS Compatibility</span>
+                    <span class="fw-bold small">{{ analysis.ats_score }}%</span>
+                </div>
+                <div class="progress" style="height: 6px;">
+                    <div class="progress-bar bg-info" style="width: {{ analysis.ats_score }}%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills Analysis -->
+    <div class="col-lg-8 mb-4">
+        <div class="card card-saas p-4 h-100">
+            <h5 class="fw-bold mb-3"><i class="bi bi-tools text-primary-custom me-2"></i> Skill Set Analysis</h5>
+            <div class="mb-4">
+                <p class="text-muted small fw-bold text-uppercase">Technical Skills Found</p>
+                <div class="d-flex flex-wrap">
+                    {% for skill in analysis.technical_skills.split|slice:":20" %}
+                    <span class="badge-skill">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="mb-0">
+                <p class="text-muted small fw-bold text-uppercase">Missing Crucial Skills</p>
+                <div class="d-flex flex-wrap">
+                    {% for skill in analysis.missing_skills.split %}
+                    <span class="badge-missing">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Analysis -->
+    <div class="col-lg-7 mb-4">
+        <div class="card card-saas p-4">
+            <h5 class="fw-bold mb-4"><i class="bi bi-journal-text text-primary-custom me-2"></i> Section Analysis</h5>
+
+            <div class="mb-4 pb-3 border-bottom">
+                <h6 class="fw-bold">Experience</h6>
+                <p class="text-muted small mb-0">{{ analysis.experience_analysis }}</p>
+            </div>
+
+            <div class="mb-4 pb-3 border-bottom">
+                <h6 class="fw-bold">Education</h6>
+                <p class="text-muted small mb-0">{{ analysis.education_analysis }}</p>
+            </div>
+
+            <div class="mb-0">
+                <h6 class="fw-bold">Projects</h6>
+                <p class="text-muted small mb-0">{{ analysis.projects_analysis }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recommendations -->
+    <div class="col-lg-5 mb-4">
+        <div class="card card-saas p-4 bg-primary text-white h-100">
+            <h5 class="fw-bold mb-4"><i class="bi bi-lightbulb me-2"></i> Actionable Suggestions</h5>
+            <ul class="list-unstyled mb-0">
+                {% for item in analysis.recommendations|json_load %}
+                <li class="d-flex gap-3 mb-3">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span class="small">{{ item }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

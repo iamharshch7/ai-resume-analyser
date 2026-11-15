@@ -1,0 +1,15 @@
+{% extends "dashboard_base.html" %}
+
+{% block dash_title %}Admin Analytics{% endblock %}
+
+{% block dashboard_content %}
+<h2 class="fw-bold mb-4">Admin Dashboard</h2>
+<div class="card card-saas p-4">
+    <p class="text-muted">Platform management &amp; analytics overview for staff members.</p>
+    <ul>
+        <li>Total Registered Users: {{ user.id }} (Sample stat)</li>
+        <li>System Status: Online</li>
+        <li>Database: SQLite</li>
+    </ul>
+</div>
+{% endblock %}

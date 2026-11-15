@@ -1,0 +1,195 @@
+:root {
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-light: #eef2ff;
+  --secondary-color: #06b6d4;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  --dark-bg: #0f172a;
+  --sidebar-bg: #1e293b;
+  --card-bg: #ffffff;
+  --text-primary: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text-primary);
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+.bg-primary-soft { background-color: var(--primary-light) !important; }
+.text-primary-custom { color: var(--primary-color) !important; }
+
+/* Navbar */
+.navbar-custom {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-color);
+}
+.brand-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+/* Sidebar for dashboard layout */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+.dashboard-sidebar {
+  width: 260px;
+  background-color: var(--sidebar-bg);
+  color: #94a3b8;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 100;
+}
+.sidebar-header {
+  padding: 1.5rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.sidebar-nav {
+  padding: 1rem 0.75rem;
+  flex-grow: 1;
+}
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #cbd5e1;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.925rem;
+  transition: all 0.2s ease;
+  margin-bottom: 0.25rem;
+}
+.sidebar-link:hover, .sidebar-link.active {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+.sidebar-link.active {
+  background: var(--primary-color);
+  color: #ffffff;
+}
+.sidebar-footer {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dashboard-content {
+  flex-grow: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* SaaS Cards */
+.card-saas {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 6px rgba(0,0,0,0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-saas:hover {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+}
+
+.stat-card {
+  padding: 1.5rem;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+}
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+/* Upload dropzone */
+.dropzone-box {
+  border: 2px dashed #cbd5e1;
+  border-radius: 14px;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  background: #f8fafc;
+  transition: all 0.2s ease;
+}
+.dropzone-box:hover, .dropzone-box.dragover {
+  border-color: var(--primary-color);
+  background: var(--primary-light);
+}
+
+/* Circular Score Gauge */
+.score-circle {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: conic-gradient(var(--primary-color) calc(var(--score) * 1%), #e2e8f0 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+.score-circle-inner {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.75rem;
+}
+
+/* Badges */
+.badge-skill {
+  background: #eef2ff;
+  color: #4338ca;
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  border-radius: 50rem;
+  font-size: 0.85rem;
+  display: inline-block;
+  margin: 0.2rem;
+}
+.badge-missing {
+  background: #fee2e2;
+  color: #b91c1c;
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  border-radius: 50rem;
+  font-size: 0.85rem;
+  display: inline-block;
+  margin: 0.2rem;
+}
+
+/* Hero Section */
+.hero-gradient {
+  background: radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.08) 0%, rgba(6, 182, 212, 0.05) 90.5%);
+  padding: 5rem 0 4rem;
+}

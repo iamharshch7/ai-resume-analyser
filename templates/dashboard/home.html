@@ -1,0 +1,72 @@
+{% extends "dashboard_base.html" %}
+
+{% block dash_title %}Dashboard{% endblock %}
+
+{% block dashboard_content %}
+<h2 class="fw-bold mb-4">Welcome back, {{ user.get_full_name|default:user.username }}!</h2>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card-saas p-4">
+            <div class="d-flex align-items-center mb-3">
+                <div class="stat-icon bg-primary-soft text-primary-custom me-3"><i class="bi bi-file-earmark-text"></i></div>
+                <div>
+                    <h6 class="text-muted small mb-0">Total Resumes</h6>
+                    <h3 class="fw-bold m-0">{{ total_analyzed }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card-saas p-4">
+            <div class="d-flex align-items-center mb-3">
+                <div class="stat-icon bg-info-subtle text-info me-3"><i class="bi bi-speedometer2"></i></div>
+                <div>
+                    <h6 class="text-muted small mb-0">Latest Score</h6>
+                    <h3 class="fw-bold m-0">{% if latest_resume and latest_resume.analysis %}{{ latest_resume.analysis.overall_score }}{% else %}--{% endif %}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h5 class="fw-bold mb-3">Recent Resumes</h5>
+<div class="card card-saas">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th class="ps-4">File Name</th>
+                    <th>Uploaded</th>
+                    <th>Overall Score</th>
+                    <th class="text-end pe-4">Report</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for resume in resumes|slice:":5" %}
+                <tr>
+                    <td class="ps-4 fw-medium">{{ resume.file.name|cut:"resumes/" }}</td>
+                    <td>{{ resume.uploaded_at|date:"M d, Y" }}</td>
+                    <td>
+                        {% if resume.analysis %}
+                        <span class="badge bg-success">{{ resume.analysis.overall_score }}/100</span>
+                        {% else %}
+                        <span class="badge bg-secondary">Pending</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-end pe-4">
+                        {% if resume.analysis %}
+                        <a href="{% url 'resumes:result' resume.id %}" class="btn btn-sm btn-outline-primary">View</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center py-4 text-muted">No resumes uploaded yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
