@@ -65,9 +65,6 @@ A professional, production-ready full-stack web application built with Django an
    python manage.py runserver
    ```
 
-## 📸 Screenshots
-
-*(Add your screenshots here!)*
 
 ## 📄 License
 
@@ -75,4 +72,3 @@ This project is licensed under the MIT License.
 
 ---
 Built with ❤️ by [iamharshch7](https://github.com/iamharshch7)
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
