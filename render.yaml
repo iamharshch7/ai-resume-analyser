@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: resume-analyser
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT config.wsgi
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.10
+      - key: DEBUG
+        value: false
+      - key: ALLOWED_HOSTS
+        value: "*"
+      # Set these in the Render dashboard:
+      # - SECRET_KEY
+      # - OPENAI_API_KEY
+      # - DATABASE_URL (or connect a PostgreSQL database below)
+    # databases:
+    #   - name: postgres
+    #     databaseName: resumedb
+    #     plan: free

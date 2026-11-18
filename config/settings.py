@@ -21,9 +21,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-fallback-key-change-me')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
+# Default to False so a missing DEBUG var never leaks debug pages in prod.
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
+
+# Allow deployment platform hosts (fly.dev / antideploy subdomains) so the app
+# keeps working even if the deployment host changes underneath it.
+ALLOWED_HOSTS.extend(['.fly.dev', '.antideploy.app', 'resume-analyser.antideploy.app', '.onrender.com'])
 
 
 # Application definition
